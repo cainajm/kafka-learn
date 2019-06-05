@@ -3,6 +3,7 @@ package com.kafka.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,13 +18,13 @@ public class PersonController {
 	@Autowired
 	private PersonService personService;
 	
-	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String create(@RequestParam String firstName, @RequestParam String lastName, @RequestParam Integer age) {
-		Person p = personService.create(firstName, lastName, age);
-		return p.toString();
+	@RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
+	public Person create(@RequestBody Person person) {
+		Person p = personService.create(person);
+		return p;
 	}
 	
-	@RequestMapping(value = "/get/{firstName}", method = RequestMethod.GET)
+	@RequestMapping(value = "/get", method = RequestMethod.GET)
 	public Person getPerson(@RequestParam String firstName) {
 		return personService.getByFirstName(firstName);
 	}
