@@ -9,6 +9,6 @@ import com.kafka.model.Person;
 
 @Repository
 public interface PersonRepository extends MongoRepository<Person, String> {
-	public Person findByFirstName(String firstName);
+	public Person findByName(String name);
 	public List<Person> findByAge(Integer age);
 }

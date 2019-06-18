@@ -4,6 +4,7 @@ import java.util.List;
 
 import java.lang.RuntimeException;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,32 +19,36 @@ public class PersonService {
 	
 	//Create operation
 	public Person create(Person person) {
-		Person p = person;
-	    if(getByFirstName(p.getFirstName()) != null) {
+		if(!person.getId().isEmpty()) {
+			person.setId(ObjectId.get().toString());
+		}
+		
+	    if(getByName(person.getName()) != null) {
 	    	throw new RuntimeException("Já existe esse nome em nosso banco de dados");
 	    }
-		return personRepository.save(p);
+	    
+		return personRepository.save(person);
 	}
+	
 	//Retrieve operation
 	public List<Person> getAll(){
 		return personRepository.findAll();
 	}
-	public Person getByFirstName(String firstName) {
-		return personRepository.findByFirstName(firstName);
+	
+	public Person getByName(String name) {
+		return personRepository.findByName(name);
 	}
+	
 	//Update operation
-	public Person update(String firstName, String lastName, Integer age) {
-		Person p = personRepository.findByFirstName(firstName);
-		p.setLastName(lastName);
-		p.setAge(age);
+	public Person update(String name, Person person) {
+		Person p = personRepository.findByName(name);
+		p = person;
+		
 		return personRepository.save(p);
 	}
 	//Delete operation
-	public void deleteAll() {
-		personRepository.deleteAll();
-	}
-	public void delete(String firstName) {
-		Person p = personRepository.findByFirstName(firstName);
+	public void delete(String name) {
+		Person p = personRepository.findByName(name);
 		personRepository.delete(p);
 	}
 }

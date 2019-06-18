@@ -7,41 +7,70 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Person {
 	@Id
 	String id;
-	String firstName;
-	String lastName;
+	String name;
+	String email;
+	String telePhone;
+	String cellPhone;
 	Integer age;
 	
-	public Person(String firstName, String lastName, Integer age) {
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public Person() {
+        super();
+    }
+	
+	public Person(String name, String email, String telePhone, String cellPhone, Integer age) {
+		this.name = name;
+		this.email = email;
+		this.telePhone = telePhone;
+		this.cellPhone = cellPhone;
 		this.age = age;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public final String getId() {
+		return id;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public final String getName() {
+		return name;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public final String getEmail() {
+		return email;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public final String getTelePhone() {
+		return telePhone;
 	}
 
-	public Integer getAge() {
+	public final String getCellPhone() {
+		return cellPhone;
+	}
+
+	public final Integer getAge() {
 		return age;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setTelePhone(String telePhone) {
+		this.telePhone = telePhone;
+	}
+
+	public void setCellPhone(String cellPhone) {
+		this.cellPhone = cellPhone;
 	}
 
 	public void setAge(Integer age) {
 		this.age = age;
 	}
-	
-	public String toString() {
-		return "Person First Name:"+firstName+" Last Name:"+lastName+" age:"+age;
-	}
+		
 }
