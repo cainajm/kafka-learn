@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping(value = "/client")
 @Api(value = "Person", description = "Client user")
+@CrossOrigin
 public class PersonController {
 	
 	@Autowired
@@ -37,7 +39,6 @@ public class PersonController {
 	@ApiOperation(value = "Client get by name")
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
 	public Person getPerson(@RequestParam String name) {
-		
 		return personService.getByName(name);
 	}
 	
